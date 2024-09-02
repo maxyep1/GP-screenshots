@@ -2,6 +2,17 @@ import streamlit as st
 import pandas as pd
 import datetime
 import io
+import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+try:
+    import openpyxl
+except ImportError:
+    install('openpyxl')
+    import openpyxl
 
 def convert_revenue_to_float(revenue_str):
     return float(revenue_str.replace('USD ', '').replace(',', ''))
